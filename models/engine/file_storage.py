@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-
-from models.base_model import BaseModel
+import models
 import json
+from models.base_model import BaseModel
 from os.path import exists
 """
 
@@ -12,7 +12,7 @@ class FileStorage():
     """
     __file_path = "file.json"
     __objects = {}
-    
+
     def all(self):
         """
         """
@@ -29,21 +29,20 @@ class FileStorage():
         """
         """
         dictionary = {}
-        for key in self.__objects:
-            dictionary[key] = self.__objects[key].to_dict()
-            # print("-----------")
-            # print(dictionary)
-            # print("-----------")
-
+        for key, value in self.__objects.items():
+            dictionary[key] = value.to_dict()
 
         with open(self.__file_path, mode="w", encoding="utf-8") as file:
-            json.dump(dictionary, file)
+            file.write(json.dumps(dictionary))
     
     def reload(self):
         """
         """
-        if exists(self.__file_path):
+        try:
             with open(self.__file_path, mode="r", encoding="utf-8") as file:
-                file_json = json.load(file)
-            for key, value in file_json.items():
-                self.__objects[key] = value
+                self.__objects=json.loads(file.read())
+            for key, value in self.__objects.items():
+                self.__objects[key] = models.dictionaries[value['__class__']](**value)
+        
+        except FileNotFoundError:
+            pass
