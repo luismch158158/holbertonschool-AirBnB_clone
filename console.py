@@ -132,10 +132,13 @@ class HBNBCommand(cmd.Cmd):
             new_member = lists[3][1:-1]
             lists[3] = new_member
 
+        ints = ["number_rooms", "number_bathrooms",
+                       "max_guest", "price_by_night"]
+        floatings =["latitude", "longitude"]
 
         if (line == "" or line is None):
             print("** class name missing **")
-        
+
         else:
             if (lists[0] in list_classes):
                 if len(lists) > 1:
@@ -143,6 +146,15 @@ class HBNBCommand(cmd.Cmd):
                     if key in models.storage.all().keys():
                         if len(lists) >= 3:
                             if len(lists) >= 4:
+                                if lists[0] == "Place":
+                                    if lists[2] in ints and isinstance(lists[3], int):
+                                        lists[3] = int(lists[3])
+                                    else:
+                                        lists[3] = 0
+                                    if lists[2] in floatings and isinstance(lists[3], float):
+                                        lists[3] = float(lists[3])
+                                    else:
+                                        lists[3] = 0.0
                                 setattr(models.storage.all()[key], lists[2], lists[3])
                                 models.storage.all()[key].save()
                             else:
