@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 import models
 import re
 
-list_classes = ["BaseModel", "User", "Person"]
+list_classes = ["BaseModel", "User", "Place", "State","City", "Amenity"]
 
 class HBNBCommand(cmd.Cmd):
     """Command Interpreter of Airbnb"""
