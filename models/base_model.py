@@ -16,7 +16,6 @@ class BaseModel():
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         if  kwargs is not None and len(kwargs) != 0:
-            print("estoy en kwargs")
             for key in kwargs.keys():
                 if key != '__class__':
                     setattr(self, key, kwargs[key])
