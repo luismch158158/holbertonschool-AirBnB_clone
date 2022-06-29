@@ -2,11 +2,17 @@
 
 import cmd
 import string, sys
-from models.base_model import BaseModel
 import models
 import re
+from models.base_model import BaseModel
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.state import State
+from models.review import Review
 
-list_classes = ["BaseModel", "User", "Place", "State","City", "Amenity"]
+list_classes = ["BaseModel", "User", "Place", "State","City", "Amenity", "Review"]
 
 class HBNBCommand(cmd.Cmd):
     """Command Interpreter of Airbnb"""
@@ -110,20 +116,25 @@ class HBNBCommand(cmd.Cmd):
         name and id by adding or updating attribute
         (save the change into the JSON file)"""
         lists = line.split()
+        total = len(lists)
         
-        for i in range(len(lists)):
-            if (lists[i][0] == '\"'):
-                lists[i] = lists[i].strip('"')
-        print(lists)
+        new_list = []
+        lista_principal = []
+        if (lists[3][0] == '\"'):
+            for i in range(total):
+                if i >= 3:
+                    new_list.append(lists[i])
+                else:
+                    lista_principal.append(lists[i])
+            new_str = " ".join(new_list)
+            lista_principal.append(new_str)
+            lists = lista_principal
+            new_member = lists[3][1:-1]
+            lists[3] = new_member
+
 
         if (line == "" or line is None):
             print("** class name missing **")
-
-        # elif (lists[0] not in list_classes):
-        #     print("** class doesn't exist **")
-        
-        # elif len(lists) < 2:
-        #     print("** instance id missing **")
         
         else:
             if (lists[0] in list_classes):
