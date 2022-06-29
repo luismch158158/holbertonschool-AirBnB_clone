@@ -147,14 +147,19 @@ class HBNBCommand(cmd.Cmd):
                         if len(lists) >= 3:
                             if len(lists) >= 4:
                                 if lists[0] == "Place":
-                                    if lists[2] in ints and isinstance(lists[3], int):
-                                        lists[3] = int(lists[3])
-                                    else:
-                                        lists[3] = 0
-                                    if lists[2] in floatings and isinstance(lists[3], float):
-                                        lists[3] = float(lists[3])
-                                    else:
-                                        lists[3] = 0.0
+                                    # El problema es que entra al else, entonces esta mal
+                                    #la validación del int
+                                    # Hacer derrepente un try o except luego del if
+                                    if lists[2] in ints and type(lists[3]) == "int":
+                                        try:
+                                            lists[3] = int(lists[3])
+                                        except:
+                                            lists[3] = 45
+                                    elif lists[2] in floatings and type(lists[3]) == "float":
+                                        try:
+                                            lists[3] = float(lists[3])
+                                        except:
+                                            lists[3] = 80
                                 setattr(models.storage.all()[key], lists[2], lists[3])
                                 models.storage.all()[key].save()
                             else:
