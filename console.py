@@ -15,7 +15,7 @@ from models.review import Review
 
 list_classes = ["BaseModel", "User", "Place", "State",
                 "City", "Amenity", "Review"]
-
+    
 
 def isfloat(num):
     try:
@@ -25,6 +25,7 @@ def isfloat(num):
         return False
 
 
+
 class HBNBCommand(cmd.Cmd):
     """Command Interpreter of Airbnb"""
 
@@ -32,6 +33,22 @@ class HBNBCommand(cmd.Cmd):
         """Constructor of Command Interpreter"""
         cmd.Cmd.__init__(self)
         self.prompt = '(hbnb)'
+
+    def default(self, line):
+        """ """
+        lists = line.split(".")
+
+        list_1 = lists[1].split("(")
+        lists[1] = list_1[0]
+        lists.reverse()
+        line = lists[1]
+        #print(line)
+
+        if lists[0] == "all":
+            HBNBCommand.do_all(self, line)
+        elif lists[0] == "count":
+            HBNBCommand.do_count(self, line)
+
 
     def do_quit(self, arg):
         """Quit command to exit the program\n"""
@@ -179,13 +196,11 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_count(self, line):
-        print("Ingrese a la function")
         lists = line.split()
         count = 0
-        for instance in storage.all().values():
-            print(storage.all().values())
-            if lists[0] == storage.all().values()["__class__"]:
-                count += 1
+        for classes in models.storage.all().values():
+           if lists[0] == classes.__class__.__name__:
+               count += 1
         print(count)
 
 if __name__ == '__main__':
