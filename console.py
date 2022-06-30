@@ -24,6 +24,16 @@ def isfloat(num):
     except ValueError:
         return False
 
+def parser(lista):
+    ['User', '"38f22813-2753-4d42-b37c-57a17f1e4f88"', '"age"', '89']
+    final_list=[]
+    for i in lista:
+        if (i[0] == '\"'):
+            final_list.append(i[1:-1])
+        else:
+            final_list.append(i)
+    return final_list
+
 
 
 class HBNBCommand(cmd.Cmd):
@@ -37,17 +47,36 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         """ """
         lists = line.split(".")
+        lista = lists[1].split("(")
+        lista2 = lista[1].split(",")
+        string = lista[-1].replace(")","")
+        lista_f = list(string.split(", "))
+        final=[]
+        final.append(lista[0])
+        final.append(lists[0])
+        final = final + lista_f
 
-        list_1 = lists[1].split("(")
-        lists[1] = list_1[0]
-        lists.reverse()
-        line = lists[1]
-        #print(line)
-
-        if lists[0] == "all":
+        if final[0] == "all":
+            line = final[1]
             HBNBCommand.do_all(self, line)
-        elif lists[0] == "count":
+        elif final[0] == "count":
+            line = final[1]
             HBNBCommand.do_count(self, line)
+
+        elif final[0] == "show":
+            line = parser(final[1:])
+            line = " ".join(line)
+            HBNBCommand.do_show(self, line)
+
+        elif final[0] == "destroy":
+            line = parser(final[1:])
+            line = " ".join(line)
+            HBNBCommand.do_destroy(self, line)
+
+        elif final[0] == "update":
+            line = parser(final[1:])
+            line = " ".join(line)
+            HBNBCommand.do_update(self, line)
 
 
     def do_quit(self, arg):
