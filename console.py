@@ -15,7 +15,11 @@ from models.review import Review
 
 list_classes = ["BaseModel", "User", "Place", "State",
                 "City", "Amenity", "Review"]
-    
+def parser_list(lists):
+    lista = lists[1:-1].replace("\"", "")
+    lista = lista.split(", ")
+    return lista
+
 
 def isfloat(num):
     try:
@@ -25,7 +29,6 @@ def isfloat(num):
         return False
 
 def parser(lista):
-    ['User', '"38f22813-2753-4d42-b37c-57a17f1e4f88"', '"age"', '89']
     final_list=[]
     for i in lista:
         if (i[0] == '\"'):
@@ -171,20 +174,6 @@ class HBNBCommand(cmd.Cmd):
         lists = line.split()
         total = len(lists)
 
-        new_list = []
-        lista_principal = []
-        if (lists[3][0] == '\"'):
-            for i in range(total):
-                if i >= 3:
-                    new_list.append(lists[i])
-                else:
-                    lista_principal.append(lists[i])
-            new_str = " ".join(new_list)
-            lista_principal.append(new_str)
-            lists = lista_principal
-            new_member = lists[3][1:-1]
-            lists[3] = new_member
-
         ints = ["number_rooms", "number_bathrooms",
                 "max_guest", "price_by_night"]
         floatings = ["latitude", "longitude"]
@@ -198,18 +187,40 @@ class HBNBCommand(cmd.Cmd):
         if len(lists) == 1:
             print("** instance id missing **")
             return
+
         else:
             key = f'{lists[0]}.{lists[1]}'
             if key in models.storage.all().keys():
                 if len(lists) >= 3:
                     if len(lists) >= 4:
+                        
+                        new_list = []
+                        lista_principal = []
+                        if (lists[3][0] == '\"' or lists[3][0] == '[') :
+                            for i in range(total):
+                                if i >= 3:
+                                    new_list.append(lists[i])
+                                else:
+                                    lista_principal.append(lists[i])
+                            new_str = " ".join(new_list)
+                            lista_principal.append(new_str)
+                            lists = lista_principal
+                            if (lists[3][0] == '\"'):
+                                new_member = lists[3][1:-1]
+                            else:
+                                new_member = lists[3]
+                            lists[3] = new_member
+
                         if lists[0] == "Place":
                             if lists[2] in ints and lists[3].isdigit():
                                 lists[3] = int(lists[3])
                             elif (lists[2] in floatings and isfloat(lists[3])):
                                 lists[3] = float(lists[3])
-                            else:
-                                return
+                            elif lists[3][0] == "[":
+                                lists[3] = parser_list(lists[3])
+                            elif lists[2] not in ints and lists[2] not in floatings:
+                                setattr(models.storage.all()[key], lists[2], lists[3])
+                                models.storage.all()[key].save()
                         setattr(models.storage.all()[key], lists[2], lists[3])
                         models.storage.all()[key].save()
                     else:
@@ -223,8 +234,8 @@ class HBNBCommand(cmd.Cmd):
         lists = line.split()
         count = 0
         for classes in models.storage.all().values():
-           if lists[0] == classes.__class__.__name__:
-               count += 1
+            if lists[0] == classes.__class__.__name__:
+                count += 1
         print(count)
 
 if __name__ == '__main__':
