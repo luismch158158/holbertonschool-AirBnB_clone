@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
 import cmd
-import string, sys
+import string
+import sys
 import models
 import re
 from models.base_model import BaseModel
@@ -12,8 +13,8 @@ from models.place import Place
 from models.state import State
 from models.review import Review
 
-list_classes = ["BaseModel", "User", "Place", "State","City", "Amenity", "Review"]
-
+list_classes = ["BaseModel", "User", "Place", "State",
+                "City", "Amenity", "Review"]
 
 
 def isfloat(num):
@@ -30,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
     def __init__(self):
         """Constructor of Command Interpreter"""
         cmd.Cmd.__init__(self)
-        self.prompt ='(hbnb)'
+        self.prompt = '(hbnb)'
 
     def do_quit(self, arg):
         """Quit command to exit the program\n"""
@@ -39,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """End Of File\n"""
         return True
-    
+
     def emptyline(self):
         """Empty line\n"""
         pass
@@ -69,10 +70,10 @@ class HBNBCommand(cmd.Cmd):
 
         elif (lists[0] not in list_classes):
             print("** class doesn't exist **")
-        
+
         elif len(lists) != 2:
             print("** instance id missing **")
-        
+
         else:
             key = f'{lists[0]}.{lists[1]}'
             if key in models.storage.all().keys():
@@ -89,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
 
         elif (lists[0] not in list_classes):
             print("** class doesn't exist **")
-        
+
         elif len(lists) != 2:
             print("** instance id missing **")
 
@@ -120,14 +121,13 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
-
     def do_update(self, line):
         """Update an instance based on the class
         name and id by adding or updating attribute
         (save the change into the JSON file)"""
         lists = line.split()
         total = len(lists)
-        
+
         new_list = []
         lista_principal = []
         if (lists[3][0] == '\"'):
@@ -143,8 +143,8 @@ class HBNBCommand(cmd.Cmd):
             lists[3] = new_member
 
         ints = ["number_rooms", "number_bathrooms",
-                       "max_guest", "price_by_night"]
-        floatings =["latitude", "longitude"]
+                "max_guest", "price_by_night"]
+        floatings = ["latitude", "longitude"]
 
         if (line == "" or line is None):
             print("** class name missing **")
@@ -159,11 +159,13 @@ class HBNBCommand(cmd.Cmd):
                                 if lists[0] == "Place":
                                     if lists[2] in ints and lists[3].isdigit():
                                         lists[3] = int(lists[3])
-                                    elif lists[2] in floatings and isfloat(lists[3]):
+                                    elif (lists[2] in floatings
+                                          ) and (isfloat(lists[3])):
                                         lists[3] = float(lists[3])
                                     else:
                                         return
-                                setattr(models.storage.all()[key], lists[2], lists[3])
+                                setattr(models.storage.all()[key],
+                                        lists[2], lists[3])
                                 models.storage.all()[key].save()
                             else:
                                 print("** value missing **")
