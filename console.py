@@ -176,6 +176,15 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
+    def do_count(self, line):
+        print("Ingrese a la function")
+        lists = line.split()
+        count = 0
+        for instance in storage.all().values():
+            print(storage.all().values())
+            if lists[0] == storage.all().values()["__class__"]:
+                count += 1
+        print(count)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
