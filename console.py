@@ -48,12 +48,9 @@ class HBNBCommand(cmd.Cmd):
         """ """
         lists = line.split(".")
         lista = lists[1].split("(")
-        lista2 = lista[1].split(",")
         string = lista[-1].replace(")","")
         lista_f = list(string.split(", "))
-        final=[]
-        final.append(lista[0])
-        final.append(lists[0])
+        final=[lista[0], lists[0]]
         final = final + lista_f
 
         if final[0] == "all":
@@ -194,35 +191,33 @@ class HBNBCommand(cmd.Cmd):
 
         if (line == "" or line is None):
             print("** class name missing **")
-
+            return
+        if (lists[0] not in list_classes):
+            print("** class doesn't exist **")
+            return
+        if len(lists) == 1:
+            print("** instance id missing **")
+            return
         else:
-            if (lists[0] in list_classes):
-                if len(lists) > 1:
-                    key = f'{lists[0]}.{lists[1]}'
-                    if key in models.storage.all().keys():
-                        if len(lists) >= 3:
-                            if len(lists) >= 4:
-                                if lists[0] == "Place":
-                                    if lists[2] in ints and lists[3].isdigit():
-                                        lists[3] = int(lists[3])
-                                    elif (lists[2] in floatings
-                                          ) and (isfloat(lists[3])):
-                                        lists[3] = float(lists[3])
-                                    else:
-                                        return
-                                setattr(models.storage.all()[key],
-                                        lists[2], lists[3])
-                                models.storage.all()[key].save()
+            key = f'{lists[0]}.{lists[1]}'
+            if key in models.storage.all().keys():
+                if len(lists) >= 3:
+                    if len(lists) >= 4:
+                        if lists[0] == "Place":
+                            if lists[2] in ints and lists[3].isdigit():
+                                lists[3] = int(lists[3])
+                            elif (lists[2] in floatings and isfloat(lists[3])):
+                                lists[3] = float(lists[3])
                             else:
-                                print("** value missing **")
-                        else:
-                            print("** attribute name missing **")
+                                return
+                        setattr(models.storage.all()[key], lists[2], lists[3])
+                        models.storage.all()[key].save()
                     else:
-                        print("** no instance found **")
+                        print("** value missing **")
                 else:
-                    print("** instance id missing **")
+                    print("** attribute name missing **")
             else:
-                print("** class doesn't exist **")
+                print("** no instance found **")
 
     def do_count(self, line):
         lists = line.split()
