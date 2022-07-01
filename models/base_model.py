@@ -52,5 +52,5 @@ class BaseModel():
         # if 'created_at' in dict_new:
         formated_created = dict_new['created_at'].strftime(new_date)
         dict_new['created_at'] = formated_created
-        
+
         return (dict_new)
