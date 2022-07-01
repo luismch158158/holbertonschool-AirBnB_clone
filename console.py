@@ -66,7 +66,10 @@ def validator(lists):
             if (lists[i][-1] == ']'):
                 new_list.append(lists[i])
                 break
-            if i >= 3:
+            if (i > 3 and lists[i][-1] == '\"'):
+                new_list.append(lists[i])
+                break
+            elif i >= 3:
                 new_list.append(lists[i])
             else:
                 lista_principal.append(lists[i])
