@@ -3,11 +3,12 @@ from models import amenity
 from models.base_model import BaseModel
 import models
 
+
 class Place(BaseModel):
     """
     Class Place that inherits from BaseModel
     """
-    
+
     city_id = ""
     user_id = ""
     name = ""
