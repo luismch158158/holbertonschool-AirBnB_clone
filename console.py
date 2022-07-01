@@ -37,6 +37,26 @@ def parser(lista):
             final_list.append(i)
     return final_list
 
+def validator(lists):
+    new_list = []
+    lista_principal = []
+    total = len(lists)
+    print(lists)
+    new_member = lists[3]
+    if (lists[3][0] == '\"' or lists[3][0] == '[') :
+        for i in range(total):
+            if i >= 3:
+                new_list.append(lists[i])
+            else:
+                lista_principal.append(lists[i])
+        new_str = " ".join(new_list)
+        lista_principal.append(new_str)
+        lists = lista_principal
+        if (lists[3][0] == '\"'):
+            new_member = lists[3][1:-1]
+        else:
+            new_member = lists[3]
+    return new_member
 
 
 class HBNBCommand(cmd.Cmd):
@@ -194,23 +214,10 @@ class HBNBCommand(cmd.Cmd):
                 if len(lists) >= 3:
                     if len(lists) >= 4:
                         
-                        new_list = []
-                        lista_principal = []
-                        if (lists[3][0] == '\"' or lists[3][0] == '[') :
-                            for i in range(total):
-                                if i >= 3:
-                                    new_list.append(lists[i])
-                                else:
-                                    lista_principal.append(lists[i])
-                            new_str = " ".join(new_list)
-                            lista_principal.append(new_str)
-                            lists = lista_principal
-                            if (lists[3][0] == '\"'):
-                                new_member = lists[3][1:-1]
-                            else:
-                                new_member = lists[3]
-                            lists[3] = new_member
-
+                        print(lists[3])
+                        new_member = validator(lists)
+                        lists[3] = new_member
+                        
                         if lists[0] == "Place":
                             if lists[2] in ints and lists[3].isdigit():
                                 lists[3] = int(lists[3])
