@@ -60,7 +60,6 @@ def validator(lists):
     new_list = []
     lista_principal = []
     total = len(lists)
-    print(lists)
     new_member = lists[3]
     if (lists[3][0] == '\"' or lists[3][0] == '['):
         for i in range(total):
@@ -243,7 +242,6 @@ class HBNBCommand(cmd.Cmd):
             if key in models.storage.all().keys():
                 if len(lists) >= 3:
                     if len(lists) >= 4:
-                        print(lists[3])
                         new_member = validator(lists)
                         lists[3] = new_member
                         if lists[0] == "Place":
