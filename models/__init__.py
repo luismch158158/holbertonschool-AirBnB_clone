@@ -8,7 +8,9 @@ from models.city import City
 from models.place import Place
 from models.state import State
 
-dictionaries = {"BaseModel": BaseModel, "User": User, "Place": Place, "State": State,"City": City, "Amenity": Amenity, "Review": Review }
+dictionaries = {"BaseModel": BaseModel, "User": User,
+                "Place": Place, "State": State, "City": City,
+                "Amenity": Amenity, "Review": Review}
 
 storage = FileStorage()
 storage.reload()
