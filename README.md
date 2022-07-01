@@ -122,6 +122,50 @@ group_luis_leslie@ubuntu:
 ```
 
 
+
+## Attributes by Class
+---
+All classes that inherit from `BaseModel`
+
+1. Class User
+
+	Public class attributes:
+	- `email`: string - empty string
+	- `password`: string - empty string
+	- `first_name`: string - empty string
+	- `last_name`: string - empty string
+2. Class State
+
+	Public class attributes:
+	- `name`: string - empty string
+
+3. Class Amenity
+
+	Public class attributes:
+	- `name`: string - empty string
+
+4. Class Place
+
+	Public class attributes:
+	- `city_id`: string - empty string: it will be the City.id
+	- `user_id`: string - empty string: it will be the User.id
+	- `name`: string - empty string
+	- `description`: string - empty string
+	- `number_rooms`: integer - 0
+	- `number_bathrooms`: integer - 0
+	- `max_guest`: integer - 0
+	- `price_by_night`: integer - 0
+	- `latitude`: float - 0.0
+	- `longitude`: float - 0.0
+	- `amenity_ids`: list of string - empty list: it will be the list of Amenity.id later
+
+5. Class Review
+
+	Public class attributes:
+	- `place_id`: string - empty string: it will be the Place.id
+	- `user_id`: string - empty string: it will be the User.id
+	- `text`: string - empty string
+
 ## Opcodes from Console
 ---
 | Opcode | Description                    |
@@ -132,6 +176,149 @@ group_luis_leslie@ubuntu:
 | `destroy`      | Deletes an instance based on the class name and id.|
 | `all`   | Prints all string representation of all instances based or not on the classnam. |
 | `update`      | Update an instance based on the class name and id by adding or updating attribute (save the change into the JSON file. |
+
+## Examples to use the console.py
+---
+In this section the operation of the console will be shown
+```
+(hbnb)create User
+db53f522-7d37-4f62-adb5-520ec7dbfaf4
+
+(hbnb)create Place
+5c7521b5-702c-4a4e-b67c-b7361dfb3cb0
+
+(hbnb)create Place
+b8f45bdb-cf34-4ca7-a186-35bb9e7ddbe9
+
+(hbnb)create Place
+7c115662-fefa-417f-8183-2e146548a83f
+
+(hbnb)all
+["[User] (db53f522-7d37-4f62-adb5-520ec7dbfaf4) {'id': 'db53f522-7d37-4f62-adb5-520ec7dbfaf4', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 8, 995907), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 8, 995915)}", "[Place] (5c7521b5-702c-4a4e-b67c-b7361dfb3cb0) {'id': '5c7521b5-702c-4a4e-b67c-b7361dfb3cb0', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 12, 735579), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 12, 735600)}", "[Place] (b8f45bdb-cf34-4ca7-a186-35bb9e7ddbe9) {'id': 'b8f45bdb-cf34-4ca7-a186-35bb9e7ddbe9', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 15, 8285), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 15, 8293)}", "[Place] (7c115662-fefa-417f-8183-2e146548a83f) {'id': '7c115662-fefa-417f-8183-2e146548a83f', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 17, 27311), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 17, 27351)}"]
+
+(hbnb)all Place
+[Place] (5c7521b5-702c-4a4e-b67c-b7361dfb3cb0) {'id': '5c7521b5-702c-4a4e-b67c-b7361dfb3cb0', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 12, 735579), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 12, 735600)}
+[Place] (b8f45bdb-cf34-4ca7-a186-35bb9e7ddbe9) {'id': 'b8f45bdb-cf34-4ca7-a186-35bb9e7ddbe9', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 15, 8285), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 15, 8293)}
+[Place] (7c115662-fefa-417f-8183-2e146548a83f) {'id': '7c115662-fefa-417f-8183-2e146548a83f', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 17, 27311), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 17, 27351)}
+
+(hbnb)update 5c7521b5-702c-4a4e-b67c-b7361dfb3cb0 name "Leslie Paz"
+
+(hbnb)show Place 5c7521b5-702c-4a4e-b67c-b7361dfb3cb0
+[Place] (5c7521b5-702c-4a4e-b67c-b7361dfb3cb0) {'id': '5c7521b5-702c-4a4e-b67c-b7361dfb3cb0', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 12, 735579), 'updated_at': datetime.datetime(2022, 7, 1, 10, 24, 59, 829520), 'name': 'Leslie Paz'}
+
+(hbnb)update Place 5c7521b5-702c-4a4e-b67c-b7361dfb3cb0 max_guest 6
+
+(hbnb)show Place 5c7521b5-702c-4a4e-b67c-b7361dfb3cb0
+[Place] (5c7521b5-702c-4a4e-b67c-b7361dfb3cb0) {'id': '5c7521b5-702c-4a4e-b67c-b7361dfb3cb0', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 12, 735579), 'updated_at': datetime.datetime(2022, 7, 1, 10, 25, 47, 295161), 'name': 'Leslie Paz', 'max_guest': 6}
+
+(hbnb)update Place 5c7521b5-702c-4a4e-b67c-b7361dfb3cb0 latitude -34.603722
+
+(hbnb)update Place 5c7521b5-702c-4a4e-b67c-b7361dfb3cb0 longitude -58.381592
+
+(hbnb)show Place 5c7521b5-702c-4a4e-b67c-b7361dfb3cb0
+[Place] (5c7521b5-702c-4a4e-b67c-b7361dfb3cb0) {'id': '5c7521b5-702c-4a4e-b67c-b7361dfb3cb0', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 12, 735579), 'updated_at': datetime.datetime(2022, 7, 1, 10, 28, 21, 913195), 'name': 'Leslie Paz', 'max_guest': 6, 'latitude': -34.603722, 'longitude': -58.381592}
+
+(hbnb)update Place 5c7521b5-702c-4a4e-b67c-b7361dfb3cb0 amenity_ids ["pool", "tv", "internet"]
+
+(hbnb)show Place 5c7521b5-702c-4a4e-b67c-b7361dfb3cb0
+[Place] (5c7521b5-702c-4a4e-b67c-b7361dfb3cb0) {'id': '5c7521b5-702c-4a4e-b67c-b7361dfb3cb0', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 12, 735579), 'updated_at': datetime.datetime(2022, 7, 1, 10, 29, 43, 866028), 'name': 'Leslie Paz', 'max_guest': 6, 'latitude': -34.603722, 'longitude': -58.381592, 'amenity_ids': ['pool', 'tv', 'internet']}
+
+(hbnb)all Place
+[Place] (5c7521b5-702c-4a4e-b67c-b7361dfb3cb0) {'id': '5c7521b5-702c-4a4e-b67c-b7361dfb3cb0', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 12, 735579), 'updated_at': datetime.datetime(2022, 7, 1, 10, 29, 43, 866028), 'name': 'Leslie Paz', 'max_guest': 6, 'latitude': -34.603722, 'longitude': -58.381592, 'amenity_ids': ['pool', 'tv', 'internet']}
+[Place] (b8f45bdb-cf34-4ca7-a186-35bb9e7ddbe9) {'id': 'b8f45bdb-cf34-4ca7-a186-35bb9e7ddbe9', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 15, 8285), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 15, 8293)}
+[Place] (7c115662-fefa-417f-8183-2e146548a83f) {'id': '7c115662-fefa-417f-8183-2e146548a83f', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 17, 27311), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 17, 27351)
+
+(hbnb)destroy Place 5c7521b5-702c-4a4e-b67c-b7361dfb3cb0
+
+(hbnb)all Place
+[Place] (b8f45bdb-cf34-4ca7-a186-35bb9e7ddbe9) {'id': 'b8f45bdb-cf34-4ca7-a186-35bb9e7ddbe9', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 15, 8285), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 15, 8293)}
+[Place] (7c115662-fefa-417f-8183-2e146548a83f) {'id': '7c115662-fefa-417f-8183-2e146548a83f', 'created_at': datetime.datetime(2022, 7, 1, 10, 23, 17, 27311), 'updated_at': datetime.datetime(2022, 7, 1, 10, 23, 17, 27351)}
+```
+## Examples to use the console.py by class name
+---
+
+In this section, the operation of the console will be shown by calling each method with the respective class.
+
+## How to use:
+- Retrieve all instances of a class by using: `<class name>.all()`
+- Retrieve the number of instances of a class: `<class name>.count()`
+- Retrieve an instance based on its ID: `<class name>.show(<id>)`
+- Destroy an instance based on his ID: `<class name>.destroy(<id>)`
+- Update an instance based on his ID: `<class name>.update(<id>, <attribute name>, <attribute value>)`
+
+```
+(hbnb)create Place
+e5954ba0-388a-40e4-809c-1e5a372a1c77
+
+(hbnb)create User
+8952c825-c6d1-4be5-89ba-e6bcb78792f7
+
+(hbnb)create Place
+efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6
+
+(hbnb)create Place
+2ba37c8a-f7ce-4878-96ec-7170bca9fef2
+
+(hbnb)Place.all()
+[Place] (e5954ba0-388a-40e4-809c-1e5a372a1c77) {'id': 'e5954ba0-388a-40e4-809c-1e5a372a1c77', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 28, 677181), 'updated_at': datetime.datetime(2022, 7, 1, 10, 34, 28, 677207)}
+[Place] (efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6) {'id': 'efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 46, 406010), 'updated_at': datetime.datetime(2022, 7, 1, 10, 34, 46, 406017)}
+[Place] (2ba37c8a-f7ce-4878-96ec-7170bca9fef2) {'id': '2ba37c8a-f7ce-4878-96ec-7170bca9fef2', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 53, 658069), 'updated_at': datetime.datetime(2022, 7, 1, 10, 34, 53, 658076)}
+
+(hbnb)User.all()
+[User] (8952c825-c6d1-4be5-89ba-e6bcb78792f7) {'id': '8952c825-c6d1-4be5-89ba-e6bcb78792f7', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 30, 676093), 'updated_at': datetime.datetime(2022, 7, 1, 10, 34, 30, 676102)}
+
+(hbnb)User.count()
+1
+
+(hbnb)Place.show("2ba37c8a-f7ce-4878-96ec-7170bca9fef2")
+[Place] (2ba37c8a-f7ce-4878-96ec-7170bca9fef2) {'id': '2ba37c8a-f7ce-4878-96ec-7170bca9fef2', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 53, 658069), 'updated_at': datetime.datetime(2022, 7, 1, 10, 34, 53, 658076)}
+
+(hbnb)Place.count()
+3
+
+(hbnb)Place.all()
+[Place] (e5954ba0-388a-40e4-809c-1e5a372a1c77) {'id': 'e5954ba0-388a-40e4-809c-1e5a372a1c77', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 28, 677181), 'updated_at': datetime.datetime(2022, 7, 1, 10, 34, 28, 677207)}
+[Place] (efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6) {'id': 'efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 46, 406010), 'updated_at': datetime.datetime(2022, 7, 1, 10, 34, 46, 406017)}
+[Place] (2ba37c8a-f7ce-4878-96ec-7170bca9fef2) {'id': '2ba37c8a-f7ce-4878-96ec-7170bca9fef2', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 53, 658069), 'updated_at': datetime.datetime(2022, 7, 1, 10, 34, 53, 658076)}
+
+(hbnb)Place.destroy("e5954ba0-388a-40e4-809c-1e5a372a1c77")
+
+(hbnb)Place.count()
+2
+
+(hbnb)Place.all()
+[Place] (efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6) {'id': 'efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 46, 406010), 'updated_at': datetime.datetime(2022, 7, 1, 10, 34, 46, 406017)}
+[Place] (2ba37c8a-f7ce-4878-96ec-7170bca9fef2) {'id': '2ba37c8a-f7ce-4878-96ec-7170bca9fef2', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 53, 658069), 'updated_at': datetime.datetime(2022, 7, 1, 10, 34, 53, 658076)}
+
+(hbnb)Place.update("efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6", "name", "Luis Manrique")
+
+(hbnb)Place.show("efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6")
+[Place] (efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6) {'id': 'efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 46, 406010), 'updated_at': datetime.datetime(2022, 7, 1, 10, 39, 49, 536812), 'name': 'Luis'}
+
+(hbnb)Place.update("efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6", "max_guest", "5")
+
+(hbnb)Place.show("efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6")
+[Place] (efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6) {'id': 'efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 46, 406010), 'updated_at': datetime.datetime(2022, 7, 1, 10, 40, 46, 576557), 'name': 'Luis', 'max_guest': 5}
+
+(hbnb)Place.update("efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6", "latitude", "40.416775")
+
+(hbnb)Place.update("efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6", "longitude", "-3.703790")
+
+(hbnb)Place.show("efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6")
+[Place] (efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6) {'id': 'efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 46, 406010), 'updated_at': datetime.datetime(2022, 7, 1, 10, 42, 41, 978670), 'name': 'Luis', 'max_guest': 5, 'latitude': 4.0, 'longitude': -3.703790}
+
+(hbnb)Place.update("efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6", "amenity_ids", ["pool", "sauna", "karaoke", "bar"])
+
+(hbnb)Place.show("efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6")
+[Place] (efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6) {'id': 'efe34d81-1c2f-4cda-bb4a-786ab9a4c6a6', 'created_at': datetime.datetime(2022, 7, 1, 10, 34, 46, 406010), 'updated_at': datetime.datetime(2022, 7, 1, 10, 45, 50, 119480), 'name': 'Luis', 'max_guest': 5, 'latitude': 4.0, 'longitude': '-', 'amenity_ids': ['pool', 'sauna', 'karaoke', 'bar']}
+
+```
+
+
+
+
+
+
 
 ## Authors
 ---
