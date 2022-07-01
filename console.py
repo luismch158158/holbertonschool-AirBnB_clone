@@ -63,6 +63,9 @@ def validator(lists):
     new_member = lists[3]
     if (lists[3][0] == '\"' or lists[3][0] == '['):
         for i in range(total):
+            if (lists[i][-1] == ']'):
+                new_list.append(lists[i])
+                break
             if i >= 3:
                 new_list.append(lists[i])
             else:
