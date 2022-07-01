@@ -88,13 +88,12 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         """Function of the HBNB command that executes
         functions by default before all functions"""
-        lists = line.split(".")
+        lists = line.split(sep=".", maxsplit=1)
         lista = lists[1].split("(")
         string = lista[-1].replace(")", "")
         lista_f = list(string.split(", "))
         final = [lista[0], lists[0]]
         final = final + lista_f
-
         if final[0] == "all":
             line = final[1]
             """Retrieve all instances of a class by using:
