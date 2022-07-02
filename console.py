@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""This module is a console that contains the entry
+point of the command interpreter"""
 
 import cmd
 import string
