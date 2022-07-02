@@ -27,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
     def __init__(self):
         """Constructor of Command Interpreter"""
         cmd.Cmd.__init__(self)
-        self.prompt = '(hbnb)'
+        self.prompt = "(hbnb) "
 
     def default(self, line):
         """Function of the HBNB command that executes
