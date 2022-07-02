@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Module that describe the Amenity test class"""
 
 from datetime import datetime
 import json
