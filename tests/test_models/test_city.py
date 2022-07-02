@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Module that describe the City test class"""
-
 from datetime import datetime
 import json
 import unittest

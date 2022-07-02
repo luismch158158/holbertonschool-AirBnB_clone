@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Module that describe the Amenity test class"""
-
 from datetime import datetime
 import json
 import unittest
@@ -14,6 +13,7 @@ class TestAmenity(unittest.TestCase):
     """
         Class for test the Amenity class method and atributes
     """
+
     def setUp(self):
         """All variables that we need
         to start for testing Amenity class"""

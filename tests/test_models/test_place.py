@@ -13,6 +13,7 @@ import models
 
 class TestPlace(unittest.TestCase):
     """Test case class of unittest """
+
     def setUp(self):
         """Method that sets all initial values"""
         self.place = Place()
