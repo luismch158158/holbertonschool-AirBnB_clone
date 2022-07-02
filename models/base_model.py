@@ -47,11 +47,9 @@ class BaseModel():
         dict_new = self.__dict__.copy()
 
         dict_new['__class__'] = self.__class__.__name__
-        if 'updated_at' in dict_new:
-            formated_updated = dict_new['updated_at'].strftime(new_date)
-            dict_new['updated_at'] = formated_updated
-        if 'created_at' in dict_new:
-            formated_created = dict_new['created_at'].strftime(new_date)
-            dict_new['created_at'] = formated_created
+        formated_updated = dict_new['updated_at'].strftime(new_date)
+        dict_new['updated_at'] = formated_updated
+        formated_created = dict_new['created_at'].strftime(new_date)
+        dict_new['created_at'] = formated_created
 
         return (dict_new)
