@@ -102,7 +102,6 @@ class HBNBCommand(cmd.Cmd):
         """Does not perform any action\n"""
         pass
 
-
     def default(self, line):
         """Function of the HBNB command that executes
         functions by default before all functions"""
@@ -144,7 +143,6 @@ class HBNBCommand(cmd.Cmd):
             """update an instance based on his ID:
             <class name>.update(<id>, <attribute name>, <attribute value>)"""
             HBNBCommand.do_update(self, line)
-
 
     def do_create(self, line):
         """Creates a new instance, saves it and prints the id\n"""
