@@ -89,6 +89,19 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
+    def do_quit(self, arg):
+        """Quit command to exit the program\n"""
+        return True
+
+    def do_EOF(self, line):
+        """EOF command to exit the program\n"""
+        print("")
+        return True
+
+    def emptyline(self):
+        """Does not perform any action\n"""
+        pass
+
     def default(self, line):
         """Function of the HBNB command that executes
         functions by default before all functions"""
@@ -131,18 +144,6 @@ class HBNBCommand(cmd.Cmd):
             <class name>.update(<id>, <attribute name>, <attribute value>)"""
             HBNBCommand.do_update(self, line)
 
-    def do_quit(self, arg):
-        """Quit command to exit the program\n"""
-        return True
-
-    def do_EOF(self, line):
-        """EOF command to exit the program\n"""
-        print("")
-        return True
-
-    def emptyline(self):
-        """Does not perform any action\n"""
-        pass
 
     def do_create(self, line):
         """Creates a new instance, saves it and prints the id\n"""
