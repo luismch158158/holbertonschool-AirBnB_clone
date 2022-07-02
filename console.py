@@ -5,130 +5,15 @@ import string
 import sys
 import models
 import re
-from models.base_model import BaseModel
-from models.user import User
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.state import State
-from models.review import Review
 
 list_classes = ["BaseModel", "User", "Place", "State",
                 "City", "Amenity", "Review"]
-
-
-def parser_list(lists):
-    """this function parses a list that is of type string into a
-    true list by decomposing each element and inserting
-    into a new list
-    Return: New List"""
-    lista = lists[1:-1].replace("\"", "")
-    lista = lista.split(", ")
-    return lista
-
-
-def isfloat(num):
-    """This function evaluates if a number
-    is a float or not a float and returns
-    True if it is a float and False if not."""
-    try:
-        float(num)
-        return True
-    except ValueError:
-        return False
-
-
-def parser(lista):
-    """This function parses the elements of a list if
-    it is a string it removes the quotes and if it does
-    not have quotes it keeps it the same, at the
-    end it returns a parsed list"""
-    final_list = []
-    for i in lista:
-        if (i[0] == '\"'):
-            final_list.append(i[1:-1])
-        else:
-            final_list.append(i)
-    return final_list
-
-
-def validator(lists):
-    """They are a valid function if what they are passing
-    me is a list or has quotes to be able to parse it and
-    return a set element with the correct type to be
-    inserted in the dictionary later"""
-    new_list = []
-    lista_principal = []
-    total = len(lists)
-    new_member = lists[3]
-    if (lists[3][0] == '\"' or lists[3][0] == '['):
-        for i in range(total):
-            if (lists[i][-1] == ']'):
-                new_list.append(lists[i])
-                break
-            if (i > 3 and lists[i][-1] == '\"'):
-                new_list.append(lists[i])
-                break
-            elif i >= 3:
-                new_list.append(lists[i])
-            else:
-                lista_principal.append(lists[i])
-        new_str = " ".join(new_list)
-        lista_principal.append(new_str)
-        lists = lista_principal
-        if (lists[3][0] == '\"'):
-            new_member = lists[3][1:-1]
-        else:
-            new_member = lists[3]
-    return new_member
 
 
 class HBNBCommand(cmd.Cmd):
     """Command Interpreter of Airbnb"""
 
     prompt = "(hbnb) "
-
-    def default(self, line):
-        """Function of the HBNB command that executes
-        functions by default before all functions"""
-        lists = line.split(sep=".", maxsplit=1)
-        lista = lists[1].split("(")
-        string = lista[-1].replace(")", "")
-        lista_f = list(string.split(", "))
-        final = [lista[0], lists[0]]
-        final = final + lista_f
-        if final[0] == "all":
-            line = final[1]
-            """Retrieve all instances of a class by using:
-            <class name>.all()"""
-            HBNBCommand.do_all(self, line)
-
-        elif final[0] == "count":
-            line = final[1]
-            """retrieve the number of instances of a class:
-            <class name>.count()"""
-            HBNBCommand.do_count(self, line)
-
-        elif final[0] == "show":
-            line = parser(final[1:])
-            line = " ".join(line)
-            """retrieve an instance based on its ID:
-            <class name>.show(<id>)"""
-            HBNBCommand.do_show(self, line)
-
-        elif final[0] == "destroy":
-            line = parser(final[1:])
-            line = " ".join(line)
-            """destroy an instance based on his ID:
-            <class name>.destroy(<id>)"""
-            HBNBCommand.do_destroy(self, line)
-
-        elif final[0] == "update":
-            line = parser(final[1:])
-            line = " ".join(line)
-            """update an instance based on his ID:
-            <class name>.update(<id>, <attribute name>, <attribute value>)"""
-            HBNBCommand.do_update(self, line)
 
     def do_quit(self, arg):
         """Quit command to exit the program\n"""
