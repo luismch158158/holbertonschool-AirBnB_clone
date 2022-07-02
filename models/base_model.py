@@ -11,30 +11,19 @@ class BaseModel():
 
     def __init__(self, *args, **kwargs):
         """Constructor of BaseModel"""
-        # self.id = str(uuid.uuid4())
-        # self.created_at = datetime.now()
-        # self.updated_at = datetime.now()
-        # if kwargs is not None and len(kwargs) != 0:
-        #     for key in kwargs.keys():
-        #         if key != '__class__':
-        #             setattr(self, key, kwargs[key])
-        #             if key == "created_at":
-        #                 self.__dict__[key] = datetime.fromisoformat(
-        #                                                     kwargs[key])
-        #             if key == "updated_at":
-        #                 self.__dict__[key] = datetime.fromisoformat(
-        #                                                     kwargs[key])
-        # else:
-        #     self.id = str(uuid.uuid4())
-        #     self.created_at = datetime.now()
-        #     self.updated_at = self.created_at
-        #     models.storage.new(self)
-        if len(kwargs) > 0:
-            for key, value in kwargs.items():
-                if key in ["created_at", "updated_at"]:
-                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                if key != "__class__":
-                    setattr(self, key, value)
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        if kwargs is not None and len(kwargs) != 0:
+            for key in kwargs.keys():
+                if key != '__class__':
+                    setattr(self, key, kwargs[key])
+                    if key == "created_at":
+                        self.__dict__[key] = datetime.fromisoformat(
+                                                            kwargs[key])
+                    if key == "updated_at":
+                        self.__dict__[key] = datetime.fromisoformat(
+                                                            kwargs[key])
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
