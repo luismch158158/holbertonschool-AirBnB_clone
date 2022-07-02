@@ -133,14 +133,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """Quit command to exit the program\n"""
-        sys.exit(1)
+        return True
 
     def do_EOF(self, line):
-        """End Of File\n"""
+        """EOF command to exit the program\n"""
+        print("")
         return True
 
     def emptyline(self):
-        """Empty line\n"""
+        """Does not perform any action\n"""
         pass
 
     def do_create(self, line):
