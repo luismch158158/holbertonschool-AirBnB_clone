@@ -24,10 +24,7 @@ list_classes = ["BaseModel", "User", "Place", "State",
 class HBNBCommand(cmd.Cmd):
     """Command Interpreter of Airbnb"""
 
-    def __init__(self):
-        """Constructor of Command Interpreter"""
-        cmd.Cmd.__init__(self)
-        self.prompt = "(hbnb) "
+    prompt = "(hbnb) "
 
     def default(self, line):
         """Function of the HBNB command that executes
