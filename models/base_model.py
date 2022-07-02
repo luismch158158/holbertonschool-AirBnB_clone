@@ -5,14 +5,15 @@ from datetime import datetime
 import models
 
 
-new_date = "%Y-%m-%dT%H:%M:%S.%f"
 
 
 class BaseModel():
     """class BaseModel that defines all common attributes/methods
         for other classes """
+
     def __init__(self, *args, **kwargs):
         """Constructor of BaseModel"""
+        new_date = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
@@ -46,9 +47,8 @@ class BaseModel():
         dict_new = self.__dict__.copy()
 
         dict_new['__class__'] = self.__class__.__name__
-        formated_updated = dict_new['updated_at'].strftime(new_date)
+        formated_updated = dict_new['updated_at'].isoformat()
         dict_new['updated_at'] = formated_updated
-        formated_created = dict_new['created_at'].strftime(new_date)
+        formated_created = dict_new['created_at'].isoformat()
         dict_new['created_at'] = formated_created
-
         return (dict_new)
