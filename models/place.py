@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Module that describe the Place class"""
+
 from models import amenity
 from models.base_model import BaseModel
 import models

@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Module that initializing"""
+
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.review import Review
