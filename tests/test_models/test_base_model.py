@@ -8,7 +8,6 @@ import uuid
 from models.base_model import BaseModel
 import os
 import models
-"""Class BaseModel"""
 
 
 class TestBaseModel(unittest.TestCase):

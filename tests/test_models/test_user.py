@@ -8,7 +8,6 @@ import uuid
 from models.user import User
 import os
 import models
-"""Class TestUser"""
 
 
 class TestUser(unittest.TestCase):

@@ -8,7 +8,6 @@ import uuid
 from models.amenity import Amenity
 import os
 import models
-"""Class TestAmenity"""
 
 
 class TestAmenity(unittest.TestCase):
