@@ -14,6 +14,7 @@ from models.amenity import Amenity
 from models.review import Review
 import os
 
+
 class TestFileStorage(unittest.TestCase):
     """Class for test the BaseModel Class method and atributes"""
 
@@ -24,7 +25,7 @@ class TestFileStorage(unittest.TestCase):
     def test_filestorage_all(self):
         """Test the dictionary __objects"""
         self.assertTrue(type(self.filestorage.all() is dict))
-    
+
     def test_filestorage_new(self):
         """ sets in __objects the obj with key <obj class name>.id"""
         key = f'{self.filestorage.__class__.name}.{self.filestorage.id}'
