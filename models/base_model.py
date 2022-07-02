@@ -5,15 +5,12 @@ from datetime import datetime
 import models
 
 
-
-
 class BaseModel():
     """class BaseModel that defines all common attributes/methods
         for other classes """
 
     def __init__(self, *args, **kwargs):
         """Constructor of BaseModel"""
-        new_date = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
@@ -22,11 +19,11 @@ class BaseModel():
                 if key != '__class__':
                     setattr(self, key, kwargs[key])
                     if key == "created_at":
-                        self.__dict__[key] = datetime.strptime(kwargs[key],
-                                                               new_date)
+                        self.__dict__[key] = datetime.fromisoformat(
+                                                            kwargs[key])
                     if key == "updated_at":
-                        self.__dict__[key] = datetime.strptime(kwargs[key],
-                                                               new_date)
+                        self.__dict__[key] = datetime.fromisoformat(
+                                                            kwargs[key])
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
