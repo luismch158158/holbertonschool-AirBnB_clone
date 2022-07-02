@@ -91,16 +91,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """Quit command to exit the program\n"""
-        return True
+        exit()
 
     def do_EOF(self, line):
         """EOF command to exit the program\n"""
-        print("")
-        return True
+        print()
+        exit()
 
     def emptyline(self):
         """Does not perform any action\n"""
         pass
+
 
     def default(self, line):
         """Function of the HBNB command that executes
